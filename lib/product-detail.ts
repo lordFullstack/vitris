@@ -9,6 +9,7 @@ export const productDetails: Record<string, ProductDetail> = {
   p1: {
     id: "p1",
     name: "Chaqueta oversize acolchada",
+    category: "Moda",
     price: 189000,
     currency: "COP",
     availability: "in_stock",
@@ -52,6 +53,7 @@ export const productDetails: Record<string, ProductDetail> = {
   p2: {
     id: "p2",
     name: "Eau de Parfum Ámbar 50ml",
+    category: "Perfumería",
     price: 132000,
     currency: "COP",
     availability: "in_stock",
@@ -80,6 +82,7 @@ export const productDetails: Record<string, ProductDetail> = {
   p3: {
     id: "p3",
     name: "Botas urbanas cuero",
+    category: "Calzado",
     price: 245000,
     currency: "COP",
     availability: "low_stock",
@@ -113,6 +116,7 @@ export const productDetails: Record<string, ProductDetail> = {
   p4: {
     id: "p4",
     name: "Audífonos inalámbricos ANC",
+    category: "Tecnología",
     price: 310000,
     currency: "COP",
     availability: "in_stock",
@@ -140,6 +144,7 @@ export const productDetails: Record<string, ProductDetail> = {
   p5: {
     id: "p5",
     name: "Vela artesanal ámbar y vainilla",
+    category: "Hogar",
     price: 48000,
     currency: "COP",
     availability: "in_stock",
@@ -164,6 +169,7 @@ export const productDetails: Record<string, ProductDetail> = {
   p6: {
     id: "p6",
     name: "Bolso mini estructurado",
+    category: "Moda",
     price: 156000,
     currency: "COP",
     availability: "out_of_stock",

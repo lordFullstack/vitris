@@ -1,14 +1,15 @@
 import { ScreenHeader } from "@/components/ui/ScreenHeader";
-import { ComingSoon } from "@/components/ui/ComingSoon";
+import { SearchView } from "@/components/explore/SearchView";
 
-export default function BuscarPage() {
+export default function BuscarPage({
+  searchParams,
+}: {
+  searchParams: { q?: string };
+}) {
   return (
     <div className="flex min-h-dvh flex-col bg-void">
       <ScreenHeader title="Buscar" />
-      <ComingSoon
-        title="Busca productos, tiendas y categorías"
-        description="La búsqueda completa con filtros llega en el LOOP 06, junto con Explorar."
-      />
+      <SearchView initialQuery={searchParams.q ?? ""} />
     </div>
   );
 }

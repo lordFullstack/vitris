@@ -97,6 +97,7 @@ export interface ProductDetail {
   price: number;
   currency: string;
   availability: Availability;
+  category: string;
   rating?: number;
   reviewsCount?: number;
   badge?: string;

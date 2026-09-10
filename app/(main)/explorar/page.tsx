@@ -1,8 +1,14 @@
 import { TopBar, TopBarAction } from "@/components/shell/TopBar";
-import { ComingSoon } from "@/components/ui/ComingSoon";
 import { IconSearch, IconMapPin } from "@/components/icons";
+import { CategoryRow } from "@/components/explore/CategoryRow";
+import { PlaceholderSection } from "@/components/explore/PlaceholderSection";
+import { SimilarRow } from "@/components/product/SimilarRow";
+import { categories, getNewArrivals, getTrending } from "@/lib/explore-data";
 
 export default function ExplorarPage() {
+  const newArrivals = getNewArrivals();
+  const trending = getTrending();
+
   return (
     <>
       <TopBar
@@ -18,10 +24,41 @@ export default function ExplorarPage() {
           </>
         }
       />
-      <ComingSoon
-        title="A ver qué hay"
-        description="Categorías visuales, tendencias, novedades y tiendas cerca de ti. Este espacio se construye en el LOOP 06."
-      />
+
+      <div className="flex flex-col gap-6 pb-4">
+        <CategoryRow categories={categories} />
+
+        <div className="px-4">
+          <SimilarRow
+            title="Nuevos"
+            items={newArrivals.map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              currency: p.currency,
+              image: p.images[0],
+            }))}
+          />
+        </div>
+
+        <div className="px-4">
+          <SimilarRow
+            title="Tendencias"
+            items={trending.map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              currency: p.currency,
+              image: p.images[0],
+            }))}
+          />
+        </div>
+
+        <PlaceholderSection
+          title="Para ti"
+          description="Todavía no tenemos un motor de recomendaciones — esto llega cuando haya suficiente actividad real en la plataforma."
+        />
+      </div>
     </>
   );
 }
