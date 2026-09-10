@@ -30,9 +30,9 @@ export function IconHome({ active, size = 24, ...props }: IconProps) {
       <path
         d="M6 10v8.5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V10"
         stroke="currentColor"
+        {...base}
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.18 : 0}
-        {...base}
       />
       <path d="M10 19.5v-5h4v5" stroke="currentColor" {...base} />
     </svg>
@@ -47,16 +47,16 @@ export function IconExplore({ active, size = 24, ...props }: IconProps) {
         cy="12"
         r="8.2"
         stroke="currentColor"
+        {...base}
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.14 : 0}
-        {...base}
       />
       <path
         d="m14.6 9.4-1.4 4-4 1.4 1.4-4 4-1.4Z"
         stroke="currentColor"
+        {...base}
         fill="currentColor"
         fillOpacity={active ? 0.9 : 0}
-        {...base}
       />
     </svg>
   );
@@ -68,9 +68,9 @@ export function IconHeart({ active, size = 24, ...props }: IconProps) {
       <path
         d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8Z"
         stroke="currentColor"
+        {...base}
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 1 : 0}
-        {...base}
       />
     </svg>
   );
@@ -82,9 +82,9 @@ export function IconChat({ active, size = 24, ...props }: IconProps) {
       <path
         d="M4 12c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5-3.6 7.5-8 7.5c-.9 0-1.8-.1-2.6-.4L5.5 20l.9-3.4C5 15.3 4 13.8 4 12Z"
         stroke="currentColor"
+        {...base}
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.16 : 0}
-        {...base}
       />
       <path d="M9 11.2h6M9 14h4" stroke="currentColor" {...base} />
     </svg>
@@ -99,16 +99,16 @@ export function IconProfile({ active, size = 24, ...props }: IconProps) {
         cy="8.2"
         r="3.2"
         stroke="currentColor"
+        {...base}
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 1 : 0}
-        {...base}
       />
       <path
         d="M5 19.5c.9-3.4 3.6-5.2 7-5.2s6.1 1.8 7 5.2"
         stroke="currentColor"
+        {...base}
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.16 : 0}
-        {...base}
       />
     </svg>
   );
@@ -253,9 +253,9 @@ export function IconSave({ active, size = 24, ...props }: IconProps) {
       <path
         d="M7 4.5h10a1 1 0 0 1 1 1V20l-6-3.6-6 3.6V5.5a1 1 0 0 1 1-1Z"
         stroke="currentColor"
+        {...base}
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.9 : 0}
-        {...base}
       />
     </svg>
   );
