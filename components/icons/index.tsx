@@ -5,6 +5,11 @@ import type { SVGProps } from "react";
  * Grid base 24×24. Stroke consistente. Terminales y joins redondeados.
  * Cada icono soporta `active` para alternar entre outline y filled.
  * Ver ICONOGRAPHY_SPEC.md
+ *
+ * IMPORTANTE: {...base} siempre va PRIMERO en cada elemento, y cualquier
+ * override (fill, fillOpacity, stroke) va DESPUÉS — en JSX, la última
+ * ocurrencia de una prop gana. Ponerlo al revés hace que `base.fill="none"`
+ * silenciosamente sobreescriba el fill activo (bug real, no solo de tipos).
  */
 
 export interface IconProps extends SVGProps<SVGSVGElement> {
@@ -22,17 +27,13 @@ const base = {
 export function IconHome({ active, size = 24, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" {...props}>
-      <path
-        d="M4 11.5 12 4l8 7.5"
-        stroke="currentColor"
-        {...base}
-      />
+      <path d="M4 11.5 12 4l8 7.5" stroke="currentColor" {...base} />
       <path
         d="M6 10v8.5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V10"
+        {...base}
         stroke="currentColor"
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.18 : 0}
-        {...base}
       />
       <path d="M10 19.5v-5h4v5" stroke="currentColor" {...base} />
     </svg>
@@ -46,17 +47,17 @@ export function IconExplore({ active, size = 24, ...props }: IconProps) {
         cx="12"
         cy="12"
         r="8.2"
+        {...base}
         stroke="currentColor"
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.14 : 0}
-        {...base}
       />
       <path
         d="m14.6 9.4-1.4 4-4 1.4 1.4-4 4-1.4Z"
+        {...base}
         stroke="currentColor"
         fill="currentColor"
         fillOpacity={active ? 0.9 : 0}
-        {...base}
       />
     </svg>
   );
@@ -67,10 +68,10 @@ export function IconHeart({ active, size = 24, ...props }: IconProps) {
     <svg width={size} height={size} viewBox="0 0 24 24" {...props}>
       <path
         d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8Z"
+        {...base}
         stroke="currentColor"
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 1 : 0}
-        {...base}
       />
     </svg>
   );
@@ -81,10 +82,10 @@ export function IconChat({ active, size = 24, ...props }: IconProps) {
     <svg width={size} height={size} viewBox="0 0 24 24" {...props}>
       <path
         d="M4 12c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5-3.6 7.5-8 7.5c-.9 0-1.8-.1-2.6-.4L5.5 20l.9-3.4C5 15.3 4 13.8 4 12Z"
+        {...base}
         stroke="currentColor"
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.16 : 0}
-        {...base}
       />
       <path d="M9 11.2h6M9 14h4" stroke="currentColor" {...base} />
     </svg>
@@ -98,17 +99,17 @@ export function IconProfile({ active, size = 24, ...props }: IconProps) {
         cx="12"
         cy="8.2"
         r="3.2"
+        {...base}
         stroke="currentColor"
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 1 : 0}
-        {...base}
       />
       <path
         d="M5 19.5c.9-3.4 3.6-5.2 7-5.2s6.1 1.8 7 5.2"
+        {...base}
         stroke="currentColor"
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.16 : 0}
-        {...base}
       />
     </svg>
   );
@@ -252,10 +253,10 @@ export function IconSave({ active, size = 24, ...props }: IconProps) {
     <svg width={size} height={size} viewBox="0 0 24 24" {...props}>
       <path
         d="M7 4.5h10a1 1 0 0 1 1 1V20l-6-3.6-6 3.6V5.5a1 1 0 0 1 1-1Z"
+        {...base}
         stroke="currentColor"
         fill={active ? "currentColor" : "none"}
         fillOpacity={active ? 0.9 : 0}
-        {...base}
       />
     </svg>
   );
