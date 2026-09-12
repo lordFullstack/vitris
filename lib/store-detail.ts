@@ -73,5 +73,7 @@ export function getStoreProducts(storeId: string) {
 }
 
 export function getStoreNovedades(storeId: string) {
-  return feedItems.filter((f) => f.store.id === storeId && f.type === "social");
+  return feedItems.filter(
+    (f) => f.store.id === storeId && f.type === "INSPIRATIONAL_POST"
+  );
 }

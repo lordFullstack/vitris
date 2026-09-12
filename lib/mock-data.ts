@@ -56,7 +56,7 @@ export const stores: Record<string, Store> = {
 export const feedItems: FeedItem[] = [
   {
     id: "f1",
-    type: "product",
+    type: "PRODUCT_POST",
     category: "Moda",
     store: stores.nova,
     images: [
@@ -76,7 +76,7 @@ export const feedItems: FeedItem[] = [
   },
   {
     id: "f2",
-    type: "social",
+    type: "INSPIRATIONAL_POST",
     category: "Perfumería",
     store: stores.luma,
     images: ["https://picsum.photos/seed/luma-social-1/800/900"],
@@ -93,7 +93,7 @@ export const feedItems: FeedItem[] = [
   },
   {
     id: "f3",
-    type: "product",
+    type: "PRODUCT_POST",
     category: "Calzado",
     store: stores.terra,
     images: [
@@ -114,7 +114,7 @@ export const feedItems: FeedItem[] = [
   },
   {
     id: "f4",
-    type: "product",
+    type: "PRODUCT_POST",
     category: "Tecnología",
     store: stores.orbe,
     images: ["https://picsum.photos/seed/orbe-tech-1/800/1000"],
@@ -130,7 +130,7 @@ export const feedItems: FeedItem[] = [
   },
   {
     id: "f5",
-    type: "social",
+    type: "INSPIRATIONAL_POST",
     category: "Hogar",
     store: stores.casa,
     images: ["https://picsum.photos/seed/casa-social-1/800/900"],
@@ -146,7 +146,7 @@ export const feedItems: FeedItem[] = [
   },
   {
     id: "f6",
-    type: "product",
+    type: "PRODUCT_POST",
     category: "Moda",
     store: stores.nova,
     images: ["https://picsum.photos/seed/nova-bag-1/800/1000"],
@@ -159,5 +159,78 @@ export const feedItems: FeedItem[] = [
       rating: 4.9,
     },
     likes: 289,
+  },
+  // ---- LOOP 07: PROMOTION, COLLECTION, STORE_STORY ----
+  {
+    id: "f7",
+    type: "PROMOTION",
+    category: "Moda",
+    store: stores.nova,
+    images: ["https://picsum.photos/seed/nova-promo-1/800/1000"],
+    promotion: {
+      label: "20% OFF",
+      conditions: "Válido hasta el 30 de septiembre en toda la colección de temporada.",
+    },
+    product: {
+      id: "p1",
+      name: "Chaqueta oversize acolchada",
+      price: 189000,
+      currency: "COP",
+      availability: "in_stock",
+      rating: 4.8,
+    },
+    likes: 47,
+  },
+  {
+    id: "f8",
+    type: "PROMOTION",
+    category: "Calzado",
+    store: stores.terra,
+    images: ["https://picsum.photos/seed/terra-promo-1/800/1000"],
+    promotion: {
+      label: "2x1 en accesorios",
+      conditions: "Este fin de semana, en tienda física y por WhatsApp.",
+    },
+    likes: 31,
+  },
+  {
+    id: "f9",
+    type: "COLLECTION",
+    category: "Moda",
+    store: stores.nova,
+    images: ["https://picsum.photos/seed/nova-col-1/800/1000"],
+    title: "Temporada Fría",
+    collectionId: "c1",
+    likes: 58,
+  },
+  {
+    id: "f10",
+    type: "COLLECTION",
+    category: "Calzado",
+    store: stores.terra,
+    images: ["https://picsum.photos/seed/terra-col-1/800/1000"],
+    title: "Urbana",
+    collectionId: "c1",
+    likes: 22,
+  },
+  {
+    id: "f11",
+    type: "STORE_STORY",
+    category: "Tecnología",
+    store: stores.orbe,
+    images: ["https://picsum.photos/seed/orbe-story-1/800/1000"],
+    title: "Conoce nuestro nuevo espacio",
+    caption: "Así se ve nuestro punto de soporte técnico esta semana, listo para resolver tus dudas en persona.",
+    likes: 64,
+  },
+  {
+    id: "f12",
+    type: "STORE_STORY",
+    category: "Hogar",
+    store: stores.casa,
+    images: ["https://picsum.photos/seed/casa-story-1/800/1000"],
+    title: "Así trabajamos",
+    caption: "Cada vela se vierte y etiqueta a mano en nuestro taller de Medellín, en lotes pequeños.",
+    likes: 39,
   },
 ];

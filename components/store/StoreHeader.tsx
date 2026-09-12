@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { StoreDetail } from "@/lib/types";
 import { buildStoreWhatsAppLink } from "@/lib/whatsapp";
 import { ShareButton } from "@/components/ui/ShareButton";
+import { FollowButton } from "@/components/ui/FollowButton";
 import { IconBack, IconWhatsapp, IconAsk } from "@/components/icons";
 
 export function StoreHeader({ store }: { store: StoreDetail }) {
@@ -50,12 +51,15 @@ export function StoreHeader({ store }: { store: StoreDetail }) {
           )}
         </div>
 
-        <p className="mt-1 text-[12.5px] text-ink-faint">
-          {store.rating && <span className="text-orbital-soft">★ {store.rating.toFixed(1)}</span>}
-          {store.followers && ` · ${store.followers.toLocaleString("es-CO")} seguidores`}
-          {typeof store.distanceKm === "number" &&
-            ` · ${store.distanceKm < 1 ? `${Math.round(store.distanceKm * 1000)} m` : `${store.distanceKm.toFixed(1)} km`}`}
-        </p>
+        <div className="mt-1 flex items-center justify-between gap-3">
+          <p className="text-[12.5px] text-ink-faint">
+            {store.rating && <span className="text-orbital-soft">★ {store.rating.toFixed(1)}</span>}
+            {store.followers && ` · ${store.followers.toLocaleString("es-CO")} seguidores`}
+            {typeof store.distanceKm === "number" &&
+              ` · ${store.distanceKm < 1 ? `${Math.round(store.distanceKm * 1000)} m` : `${store.distanceKm.toFixed(1)} km`}`}
+          </p>
+          <FollowButton storeId={store.id} variant="compact" />
+        </div>
 
         <p className="mt-2.5 text-[14px] leading-relaxed text-ink-soft">{store.bio}</p>
 

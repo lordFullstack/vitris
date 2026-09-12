@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Manrope } from "next/font/google";
 import { SavedItemsProvider } from "@/lib/saved-context";
+import { FollowProvider } from "@/lib/follow-context";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -37,7 +38,9 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${spaceGrotesk.variable} ${manrope.variable}`}>
       <body className="font-body bg-void text-ink antialiased">
-        <SavedItemsProvider>{children}</SavedItemsProvider>
+        <SavedItemsProvider>
+          <FollowProvider>{children}</FollowProvider>
+        </SavedItemsProvider>
       </body>
     </html>
   );

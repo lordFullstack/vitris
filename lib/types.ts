@@ -20,7 +20,17 @@ export interface Product {
   rating?: number;
 }
 
-export type FeedItemType = "product" | "social";
+export type FeedItemType =
+  | "PRODUCT_POST"
+  | "INSPIRATIONAL_POST"
+  | "PROMOTION"
+  | "COLLECTION"
+  | "STORE_STORY";
+
+export interface Promotion {
+  label: string;
+  conditions?: string;
+}
 
 export interface FeedItem {
   id: string;
@@ -32,6 +42,12 @@ export interface FeedItem {
   product?: Product;
   badge?: string;
   likes: number;
+  /** INSPIRATIONAL_POST / COLLECTION / STORE_STORY */
+  title?: string;
+  /** solo PROMOTION */
+  promotion?: Promotion;
+  /** solo COLLECTION — referencia a StoreCollection.id dentro de store-detail.ts */
+  collectionId?: string;
 }
 
 export interface VariantOption {
