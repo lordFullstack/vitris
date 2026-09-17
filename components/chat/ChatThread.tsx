@@ -19,14 +19,16 @@ export function ChatThread({
   product,
   initialMessages,
   status,
+  initialInput,
 }: {
   store: Store;
   product?: ProductDetail;
   initialMessages: ChatMessage[];
   status?: ConversationStatus;
+  initialInput?: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(initialInput ?? "");
 
   function sendText(text: string) {
     const trimmed = text.trim();

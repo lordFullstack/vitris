@@ -46,6 +46,15 @@ export function ProductDetailView({ detail }: { detail: ProductDetail }) {
     return labels;
   }, [selection, detail.variants]);
 
+  const askHref = useMemo(() => {
+    const variantText = Object.values(selectedLabels).join(", ");
+    const params = new URLSearchParams({ producto: detail.id });
+    if (variantText) {
+      params.set("mensaje", `Me interesa (${variantText}). `);
+    }
+    return `/chat?${params.toString()}`;
+  }, [detail.id, selectedLabels]);
+
   return (
     <div className="flex min-h-dvh flex-col bg-void pb-24">
       <div className="relative">
@@ -113,16 +122,23 @@ export function ProductDetailView({ detail }: { detail: ProductDetail }) {
           </div>
         </div>
 
-        {detail.variants?.map((group) => (
-          <VariantPicker
-            key={group.id}
-            group={group}
-            selected={selection[group.id]}
-            onSelect={(optId) =>
-              setSelection((s) => ({ ...s, [group.id]: optId }))
-            }
-          />
-        ))}
+        {!!detail.variants?.length && (
+          <div className="flex flex-col gap-4">
+            {detail.variants.map((group) => (
+              <VariantPicker
+                key={group.id}
+                group={group}
+                selected={selection[group.id]}
+                onSelect={(optId) =>
+                  setSelection((s) => ({ ...s, [group.id]: optId }))
+                }
+              />
+            ))}
+            <p className="-mt-2 text-[12.5px] text-ink-soft">
+              Tu selección se incluye en el mensaje.
+            </p>
+          </div>
+        )}
 
         <div>
           <p className="line-clamp-2 text-[14px] leading-relaxed text-ink-soft">
@@ -144,7 +160,7 @@ export function ProductDetailView({ detail }: { detail: ProductDetail }) {
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-graphite-line/60 bg-void/90 px-4 pb-3 pt-3 backdrop-blur-xl">
         <div className="flex items-center gap-2">
-          <QuickQuestion href={`/chat?producto=${detail.id}`} />
+          <QuickQuestion href={askHref} />
           <WhatsAppButton
             store={detail.store}
             product={detail}

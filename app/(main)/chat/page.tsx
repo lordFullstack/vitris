@@ -8,7 +8,7 @@ import { stores } from "@/lib/mock-data";
 export default function ChatPage({
   searchParams,
 }: {
-  searchParams: { producto?: string; tienda?: string; conv?: string };
+  searchParams: { producto?: string; tienda?: string; conv?: string; mensaje?: string };
 }) {
   if (searchParams.conv) {
     const conv = getConversation(searchParams.conv);
@@ -29,7 +29,14 @@ export default function ChatPage({
   if (searchParams.producto) {
     const product = productDetails[searchParams.producto];
     if (product) {
-      return <ChatThread store={product.store} product={product} initialMessages={[]} />;
+      return (
+        <ChatThread
+          store={product.store}
+          product={product}
+          initialMessages={[]}
+          initialInput={searchParams.mensaje}
+        />
+      );
     }
   }
 
