@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useMemo } from "react";
+import { usePersistedState } from "./use-persisted-state";
 
 export interface SavedEntry {
   productId: string;
@@ -23,66 +18,57 @@ interface SavedContextValue {
 }
 
 const SavedContext = createContext<SavedContextValue | null>(null);
-const STORAGE_KEY = "social-commerce:saved";
+const STORAGE_KEY = "vitris:saved";
+const LEGACY_KEY = "social-commerce:saved";
 
 export function SavedItemsProvider({ children }: { children: React.ReactNode }) {
-  const [saved, setSaved] = useState<Record<string, SavedEntry>>({});
-  const [hydrated, setHydrated] = useState(false);
-
-  // Hidratamos desde localStorage solo en cliente para evitar mismatch de SSR.
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) setSaved(JSON.parse(raw));
-    } catch {
-      // localStorage no disponible o corrupto — seguimos con estado vacío
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-    } catch {
-      // almacenamiento lleno o no disponible — no bloqueamos la UI por esto
-    }
-  }, [saved, hydrated]);
+  const {
+    value: saved,
+    setValue: setSaved,
+    hydrated,
+  } = usePersistedState<Record<string, SavedEntry>>(STORAGE_KEY, {}, 1, LEGACY_KEY);
 
   const isSaved = useCallback(
     (productId: string) => Boolean(saved[productId]),
     [saved]
   );
 
-  const toggleSave = useCallback((productId: string) => {
-    setSaved((s) => {
-      if (s[productId]) {
-        const next = { ...s };
-        delete next[productId];
-        return next;
-      }
-      return {
-        ...s,
-        [productId]: {
-          productId,
-          listId: "general",
-          savedAt: new Date().toISOString(),
-        },
-      };
-    });
-  }, []);
-
-  const setList = useCallback((productId: string, listId: string) => {
-    setSaved((s) =>
-      s[productId] ? { ...s, [productId]: { ...s[productId], listId } } : s
-    );
-  }, []);
-
-  return (
-    <SavedContext.Provider value={{ saved, hydrated, isSaved, toggleSave, setList }}>
-      {children}
-    </SavedContext.Provider>
+  const toggleSave = useCallback(
+    (productId: string) => {
+      setSaved((s) => {
+        if (s[productId]) {
+          const next = { ...s };
+          delete next[productId];
+          return next;
+        }
+        return {
+          ...s,
+          [productId]: {
+            productId,
+            listId: "general",
+            savedAt: new Date().toISOString(),
+          },
+        };
+      });
+    },
+    [setSaved]
   );
+
+  const setList = useCallback(
+    (productId: string, listId: string) => {
+      setSaved((s) =>
+        s[productId] ? { ...s, [productId]: { ...s[productId], listId } } : s
+      );
+    },
+    [setSaved]
+  );
+
+  const value = useMemo(
+    () => ({ saved, hydrated, isSaved, toggleSave, setList }),
+    [saved, hydrated, isSaved, toggleSave, setList]
+  );
+
+  return <SavedContext.Provider value={value}>{children}</SavedContext.Provider>;
 }
 
 export function useSavedItems() {
