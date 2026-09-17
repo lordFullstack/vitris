@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IconAsk } from "@/components/icons";
+import { IconChat } from "@/components/icons";
 
 export function QuickQuestion({
   productId,
@@ -18,7 +18,7 @@ export function QuickQuestion({
           : "flex h-11 w-11 items-center justify-center rounded-pill text-ink-soft transition-colors active:bg-graphite-elevated"
       }
     >
-      <IconAsk size={overlay ? 19 : 20} />
+      <IconChat size={overlay ? 19 : 20} />
     </Link>
   );
 }

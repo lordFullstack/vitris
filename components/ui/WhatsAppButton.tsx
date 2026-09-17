@@ -30,7 +30,7 @@ export function WhatsAppButton({
       className="flex h-11 flex-1 items-center justify-center gap-2 rounded-pill bg-whats px-4 text-[13.5px] font-semibold text-void transition-transform active:scale-[0.98]"
     >
       <IconWhatsapp size={16} />
-      Comprar por WhatsApp
+      Escribir por WhatsApp
     </a>
   );
 }
