@@ -2,23 +2,22 @@ import { TopBar } from "@/components/shell/TopBar";
 import { ConversationList } from "@/components/chat/ConversationList";
 import { ChatThread } from "@/components/chat/ChatThread";
 import { getConversation, findConversationByStore } from "@/lib/chat-data";
-import { productDetails } from "@/lib/product-detail";
-import { stores } from "@/lib/mock-data";
+import { productRepo, storeRepo } from "@/lib/data";
 
-export default function ChatPage({
+export default async function ChatPage({
   searchParams,
 }: {
   searchParams: { producto?: string; tienda?: string; conv?: string; mensaje?: string };
 }) {
   if (searchParams.conv) {
     const conv = getConversation(searchParams.conv);
-    const store = conv ? stores[conv.storeId] : undefined;
+    const store = conv ? await storeRepo.getById(conv.storeId) : undefined;
     if (conv && store) {
-      const product = conv.productId ? productDetails[conv.productId] : undefined;
+      const product = conv.productId ? await productRepo.getById(conv.productId) : undefined;
       return (
         <ChatThread
           store={store}
-          product={product}
+          product={product ?? undefined}
           initialMessages={conv.messages}
           status={conv.status}
         />
@@ -27,7 +26,7 @@ export default function ChatPage({
   }
 
   if (searchParams.producto) {
-    const product = productDetails[searchParams.producto];
+    const product = await productRepo.getById(searchParams.producto);
     if (product) {
       return (
         <ChatThread
@@ -41,7 +40,7 @@ export default function ChatPage({
   }
 
   if (searchParams.tienda) {
-    const store = stores[searchParams.tienda];
+    const store = await storeRepo.getById(searchParams.tienda);
     if (store) {
       const existing = findConversationByStore(store.id);
       if (existing) {

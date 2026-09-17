@@ -1,8 +1,12 @@
-import { productDetails } from "./product-detail";
+import { mockProductRepo } from "./products";
 
-// Mock centralizado para Explorar (LOOP 06).
+// Mock centralizado para Explorar. Antes lib/explore-data.ts.
 // "Nuevos" y "Tendencias" son curados a mano — no hay motor de recomendación
-// ni ranking real todavía (fuera de alcance de este LOOP).
+// ni ranking real todavía (fuera de alcance del LOOP 06 original).
+//
+// No tiene contrato de repositorio propio (no es un dominio del Bloque B):
+// categories/popularSearches son copy estático, y getNewArrivals/getTrending
+// son listas curadas que resuelven contra ProductRepo.
 
 export interface Category {
   id: string;
@@ -24,12 +28,14 @@ export const categories: Category[] = [
 const newArrivalIds = ["p1", "p4", "p6"];
 const trendingIds = ["p3", "p1", "p2", "p4"];
 
-export function getNewArrivals() {
-  return newArrivalIds.map((id) => productDetails[id]).filter(Boolean);
+export async function getNewArrivals() {
+  const items = await Promise.all(newArrivalIds.map((id) => mockProductRepo.getById(id)));
+  return items.filter((p) => p !== null);
 }
 
-export function getTrending() {
-  return trendingIds.map((id) => productDetails[id]).filter(Boolean);
+export async function getTrending() {
+  const items = await Promise.all(trendingIds.map((id) => mockProductRepo.getById(id)));
+  return items.filter((p) => p !== null);
 }
 
 export const popularSearches = ["chaqueta", "perfume", "botas", "audífonos", "vela"];

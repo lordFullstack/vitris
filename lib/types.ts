@@ -11,6 +11,11 @@ export interface Store {
   followers?: number;
 }
 
+/** Forma segura para listados públicos (StoreRepo.list): nunca lleva
+ *  whatsappNumber. Un listado de tiendas es, sin esto, un directorio de
+ *  números listo para scraping — ver LOOP 07, B.7. */
+export type PublicStore = Omit<Store, "whatsappNumber">;
+
 export interface Product {
   id: string;
   name: string;

@@ -3,11 +3,10 @@ import { IconSearch, IconMapPin } from "@/components/icons";
 import { CategoryRow } from "@/components/explore/CategoryRow";
 import { PlaceholderSection } from "@/components/explore/PlaceholderSection";
 import { SimilarRow } from "@/components/product/SimilarRow";
-import { categories, getNewArrivals, getTrending } from "@/lib/explore-data";
+import { categories, getNewArrivals, getTrending } from "@/lib/data";
 
-export default function ExplorarPage() {
-  const newArrivals = getNewArrivals();
-  const trending = getTrending();
+export default async function ExplorarPage() {
+  const [newArrivals, trending] = await Promise.all([getNewArrivals(), getTrending()]);
 
   return (
     <>

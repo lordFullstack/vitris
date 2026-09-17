@@ -1,10 +1,58 @@
-import type { StoreDetail } from "./types";
-import { stores, feedItems } from "./mock-data";
-import { productDetails } from "./product-detail";
+import type { Store, StoreDetail, PublicStore } from "@/lib/types";
+import type { StoreRepo } from "../types";
 
-// Mock centralizado para Store Profile (LOOP 03).
-// Productos y novedades se derivan de los mocks ya existentes (feed + product-detail)
-// para no duplicar datos — cuando exista Supabase esto será una query real.
+// Mock centralizado de tiendas. Antes vivía repartido entre lib/mock-data.ts
+// (stores) y lib/store-detail.ts (storeDetails) — ahora detrás de la frontera.
+
+export const stores: Record<string, Store> = {
+  nova: {
+    id: "nova",
+    name: "Nova Studio",
+    avatarUrl: "https://i.pravatar.cc/64?img=32",
+    verified: true,
+    distanceKm: 1.2,
+    whatsappNumber: "573001234567",
+    rating: 0,
+    followers: 3200,
+  },
+  luma: {
+    id: "luma",
+    name: "Luma Perfumería",
+    avatarUrl: "https://i.pravatar.cc/64?img=47",
+    verified: true,
+    distanceKm: 3.8,
+    whatsappNumber: "573007654321",
+    rating: 0,
+    followers: 5100,
+  },
+  terra: {
+    id: "terra",
+    name: "Terra Calzado",
+    avatarUrl: "https://i.pravatar.cc/64?img=15",
+    distanceKm: 0.6,
+    whatsappNumber: "573009988776",
+    rating: 0,
+    followers: 1800,
+  },
+  orbe: {
+    id: "orbe",
+    name: "Órbita Tech",
+    avatarUrl: "https://i.pravatar.cc/64?img=60",
+    verified: true,
+    whatsappNumber: "573005544332",
+    rating: 0,
+    followers: 6400,
+  },
+  casa: {
+    id: "casa",
+    name: "Casa Cálida",
+    avatarUrl: "https://i.pravatar.cc/64?img=25",
+    distanceKm: 5.4,
+    whatsappNumber: "573002211334",
+    rating: 0,
+    followers: 940,
+  },
+};
 
 export const storeDetails: Record<string, StoreDetail> = {
   nova: {
@@ -68,12 +116,24 @@ export const storeDetails: Record<string, StoreDetail> = {
   },
 };
 
-export function getStoreProducts(storeId: string) {
-  return Object.values(productDetails).filter((p) => p.store.id === storeId);
+function toPublicStore(store: Store): PublicStore {
+  const { whatsappNumber, ...rest } = store;
+  void whatsappNumber;
+  return rest;
 }
 
-export function getStoreNovedades(storeId: string) {
-  return feedItems.filter(
-    (f) => f.store.id === storeId && f.type === "INSPIRATIONAL_POST"
-  );
-}
+export const mockStoreRepo: StoreRepo = {
+  async list(params) {
+    void params; // no hay dato de ciudad en el mock todavía; Supabase sí filtrará
+    return Object.values(stores).map(toPublicStore);
+  },
+
+  async getById(id) {
+    return storeDetails[id] ?? null;
+  },
+
+  async getBySlug(slug) {
+    // Hoy el id ya funciona como slug — no hay un campo separado.
+    return storeDetails[slug] ?? null;
+  },
+};

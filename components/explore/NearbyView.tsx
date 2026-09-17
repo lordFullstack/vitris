@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { stores } from "@/lib/mock-data";
+import type { PublicStore } from "@/lib/types";
 import { IconMapPin } from "@/components/icons";
 
 type Status = "idle" | "requesting" | "granted" | "denied" | "unsupported";
 
-export function NearbyView() {
+export function NearbyView({ stores }: { stores: PublicStore[] }) {
   const [status, setStatus] = useState<Status>("idle");
 
   function requestLocation() {
@@ -24,7 +24,7 @@ export function NearbyView() {
   }
 
   if (status === "granted") {
-    const nearby = Object.values(stores)
+    const nearby = stores
       .filter((s) => typeof s.distanceKm === "number")
       .sort((a, b) => (a.distanceKm ?? 0) - (b.distanceKm ?? 0));
 

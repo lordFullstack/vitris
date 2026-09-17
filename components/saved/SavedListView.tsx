@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useSavedItems } from "@/lib/saved-context";
 import type { SavedEntry } from "@/lib/saved-context";
 import type { ProductDetail } from "@/lib/types";
-import { productDetails } from "@/lib/product-detail";
 import { SavedItemRow } from "./SavedItemRow";
 import { CompareView } from "./CompareView";
 import { ListPickerSheet } from "./ListPickerSheet";
@@ -20,21 +19,27 @@ const presetTabs = [
   { id: "esperando-stock", label: "Esperando stock" },
 ];
 
-export function SavedListView() {
+export function SavedListView({ products }: { products: ProductDetail[] }) {
   const { saved, hydrated } = useSavedItems();
   const [activeTab, setActiveTab] = useState("todos");
   const [customLists, setCustomLists] = useState<string[]>([]);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [compareIds, setCompareIds] = useState<string[]>([]);
 
+  const productsById = useMemo(() => {
+    const map: Record<string, ProductDetail> = {};
+    products.forEach((p) => (map[p.id] = p));
+    return map;
+  }, [products]);
+
   const items = useMemo(() => {
     const list: { entry: SavedEntry; product: ProductDetail }[] = [];
     Object.values(saved).forEach((entry) => {
-      const product = productDetails[entry.productId];
+      const product = productsById[entry.productId];
       if (product) list.push({ entry, product });
     });
     return list.sort((a, b) => (a.entry.savedAt < b.entry.savedAt ? 1 : -1));
-  }, [saved]);
+  }, [saved, productsById]);
 
   const filtered = useMemo(() => {
     if (activeTab === "todos" || activeTab === "comparar") return items;

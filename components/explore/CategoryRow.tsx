@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Category } from "@/lib/explore-data";
+import type { Category } from "@/lib/data";
 
 export function CategoryRow({ categories }: { categories: Category[] }) {
   return (

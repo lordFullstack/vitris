@@ -1,9 +1,8 @@
-import type { ProductDetail } from "./types";
-import { stores } from "./mock-data";
+import type { ProductDetail } from "@/lib/types";
+import type { ProductRepo } from "../types";
+import { stores } from "./stores";
 
-// Mock centralizado para Product Detail (LOOP 02).
-// Reutiliza los mismos IDs de producto que aparecen en el feed (LOOP 01)
-// para que la navegación feed → detalle sea coherente.
+// Mock centralizado de productos. Antes lib/product-detail.ts.
 
 export const productDetails: Record<string, ProductDetail> = {
   p1: {
@@ -195,5 +194,30 @@ export const productDetails: Record<string, ProductDetail> = {
     similar: [
       { id: "p1", name: "Chaqueta oversize acolchada", price: 189000, currency: "COP", image: "https://picsum.photos/seed/nova-jacket-1/500/620" },
     ],
+  },
+};
+
+export const mockProductRepo: ProductRepo = {
+  async list(params) {
+    let items = Object.values(productDetails);
+    if (params?.category) {
+      items = items.filter((p) => p.category === params.category);
+    }
+    if (params?.cursor) {
+      const idx = items.findIndex((p) => p.id === params.cursor);
+      if (idx >= 0) items = items.slice(idx + 1);
+    }
+    if (params?.limit) {
+      items = items.slice(0, params.limit);
+    }
+    return items;
+  },
+
+  async getById(id) {
+    return productDetails[id] ?? null;
+  },
+
+  async listByStore(storeId) {
+    return Object.values(productDetails).filter((p) => p.store.id === storeId);
   },
 };

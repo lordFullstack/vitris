@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { productDetails } from "@/lib/product-detail";
+import { productRepo } from "@/lib/data";
 import { ProductDetailView } from "@/components/product/ProductDetailView";
 
-export default function ProductoPage({ params }: { params: { id: string } }) {
-  const detail = productDetails[params.id];
+export default async function ProductoPage({ params }: { params: { id: string } }) {
+  const detail = await productRepo.getById(params.id);
 
   if (!detail) {
     return (

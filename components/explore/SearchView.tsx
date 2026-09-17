@@ -2,27 +2,34 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { productDetails } from "@/lib/product-detail";
-import { stores } from "@/lib/mock-data";
-import { categories, popularSearches } from "@/lib/explore-data";
+import type { ProductDetail, PublicStore } from "@/lib/types";
+import { categories, popularSearches } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 import { IconSearch, IconClose } from "@/components/icons";
 
-export function SearchView({ initialQuery = "" }: { initialQuery?: string }) {
+export function SearchView({
+  initialQuery = "",
+  products,
+  stores,
+}: {
+  initialQuery?: string;
+  products: ProductDetail[];
+  stores: PublicStore[];
+}) {
   const [query, setQuery] = useState(initialQuery);
   const q = query.trim().toLowerCase();
 
   const matchedProducts = useMemo(() => {
     if (!q) return [];
-    return Object.values(productDetails).filter(
+    return products.filter(
       (p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)
     );
-  }, [q]);
+  }, [q, products]);
 
   const matchedStores = useMemo(() => {
     if (!q) return [];
-    return Object.values(stores).filter((s) => s.name.toLowerCase().includes(q));
-  }, [q]);
+    return stores.filter((s) => s.name.toLowerCase().includes(q));
+  }, [q, stores]);
 
   const hasResults = matchedProducts.length > 0 || matchedStores.length > 0;
 
