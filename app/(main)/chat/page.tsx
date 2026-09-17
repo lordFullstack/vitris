@@ -1,8 +1,7 @@
 import { TopBar } from "@/components/shell/TopBar";
 import { ConversationList } from "@/components/chat/ConversationList";
 import { ChatThread } from "@/components/chat/ChatThread";
-import { getConversation, findConversationByStore } from "@/lib/chat-data";
-import { productRepo, storeRepo } from "@/lib/data";
+import { conversationRepo, storeRepo, productRepo } from "@/lib/data";
 
 export default async function ChatPage({
   searchParams,
@@ -10,12 +9,14 @@ export default async function ChatPage({
   searchParams: { producto?: string; tienda?: string; conv?: string; mensaje?: string };
 }) {
   if (searchParams.conv) {
-    const conv = getConversation(searchParams.conv);
-    const store = conv ? await storeRepo.getById(conv.storeId) : undefined;
+    const conv = await conversationRepo.getById(searchParams.conv);
+    const store = conv ? await storeRepo.getById(conv.storeId) : null;
     if (conv && store) {
-      const product = conv.productId ? await productRepo.getById(conv.productId) : undefined;
+      await conversationRepo.markRead(conv.id);
+      const product = conv.productId ? await productRepo.getById(conv.productId) : null;
       return (
         <ChatThread
+          conversationId={conv.id}
           store={store}
           product={product ?? undefined}
           initialMessages={conv.messages}
@@ -28,11 +29,18 @@ export default async function ChatPage({
   if (searchParams.producto) {
     const product = await productRepo.getById(searchParams.producto);
     if (product) {
+      const conv = await conversationRepo.findOrCreate({
+        storeId: product.store.id,
+        productId: product.id,
+      });
+      await conversationRepo.markRead(conv.id);
       return (
         <ChatThread
+          conversationId={conv.id}
           store={product.store}
           product={product}
-          initialMessages={[]}
+          initialMessages={conv.messages}
+          status={conv.status}
           initialInput={searchParams.mensaje}
         />
       );
@@ -42,24 +50,28 @@ export default async function ChatPage({
   if (searchParams.tienda) {
     const store = await storeRepo.getById(searchParams.tienda);
     if (store) {
-      const existing = findConversationByStore(store.id);
-      if (existing) {
-        return (
-          <ChatThread
-            store={store}
-            initialMessages={existing.messages}
-            status={existing.status}
-          />
-        );
-      }
-      return <ChatThread store={store} initialMessages={[]} />;
+      const conv = await conversationRepo.findOrCreate({ storeId: store.id });
+      await conversationRepo.markRead(conv.id);
+      return (
+        <ChatThread
+          conversationId={conv.id}
+          store={store}
+          initialMessages={conv.messages}
+          status={conv.status}
+        />
+      );
     }
   }
+
+  const [conversations, stores] = await Promise.all([
+    conversationRepo.list(),
+    storeRepo.list(),
+  ]);
 
   return (
     <>
       <TopBar title="Preguntas" />
-      <ConversationList />
+      <ConversationList conversations={conversations} stores={stores} />
     </>
   );
 }

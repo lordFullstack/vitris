@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { conversations } from "@/lib/chat-data";
-import { stores } from "@/lib/mock-data";
 import { formatRelativeDate } from "@/lib/format";
-import type { ConversationStatus } from "@/lib/types";
+import type { Conversation, ConversationStatus, PublicStore } from "@/lib/types";
 
 const statusTabs: { id: ConversationStatus | "todas"; label: string }[] = [
   { id: "todas", label: "Todas" },
@@ -14,8 +12,16 @@ const statusTabs: { id: ConversationStatus | "todas"; label: string }[] = [
   { id: "archivada", label: "Archivadas" },
 ];
 
-export function ConversationList() {
+export function ConversationList({
+  conversations,
+  stores,
+}: {
+  conversations: Conversation[];
+  stores: PublicStore[];
+}) {
   const [tab, setTab] = useState<ConversationStatus | "todas">("todas");
+  const storeById: Record<string, PublicStore> = {};
+  stores.forEach((s) => (storeById[s.id] = s));
 
   const filtered =
     tab === "todas" ? conversations : conversations.filter((c) => c.status === tab);
@@ -48,7 +54,7 @@ export function ConversationList() {
       ) : (
         <div className="flex flex-col">
           {sorted.map((c) => {
-            const store = stores[c.storeId];
+            const store = storeById[c.storeId];
             if (!store) return null;
             return (
               <Link

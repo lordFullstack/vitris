@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Store, ProductDetail, ChatMessage, ConversationStatus } from "@/lib/types";
-import { quickQuestions } from "@/lib/chat-data";
+import { quickQuestions } from "@/lib/data";
+import { sendChatMessage } from "@/lib/data/actions";
 import { buildChatWhatsAppLink } from "@/lib/whatsapp";
 import { formatPrice } from "@/lib/format";
 import { IconBack, IconWhatsapp } from "@/components/icons";
@@ -15,12 +16,14 @@ const statusLabel: Record<ConversationStatus, string> = {
 };
 
 export function ChatThread({
+  conversationId,
   store,
   product,
   initialMessages,
   status,
   initialInput,
 }: {
+  conversationId: string;
   store: Store;
   product?: ProductDetail;
   initialMessages: ChatMessage[];
@@ -30,14 +33,12 @@ export function ChatThread({
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [input, setInput] = useState(initialInput ?? "");
 
-  function sendText(text: string) {
+  async function sendText(text: string) {
     const trimmed = text.trim();
     if (!trimmed) return;
-    setMessages((m) => [
-      ...m,
-      { id: `local-${Date.now()}`, from: "user", text: trimmed, time: new Date().toISOString() },
-    ]);
     setInput("");
+    const message = await sendChatMessage(conversationId, trimmed);
+    setMessages((m) => [...m, message]);
   }
 
   const lastUserText =
