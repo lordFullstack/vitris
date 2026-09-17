@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { ProductDetail, VariantGroup } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
+import { useCaptureRef } from "@/lib/capture-ref";
 import { ProductGallery } from "@/components/feed/ProductGallery";
 import { ProductBadge, AvailabilityTag, Rating } from "@/components/feed/ProductMeta";
 import { VariantPicker } from "./VariantPicker";
@@ -25,6 +26,7 @@ function defaultSelection(variants: VariantGroup[] | undefined) {
 }
 
 export function ProductDetailView({ detail }: { detail: ProductDetail }) {
+  useCaptureRef();
   const [selection, setSelection] = useState(() => defaultSelection(detail.variants));
   const [sheetOpen, setSheetOpen] = useState(false);
 
