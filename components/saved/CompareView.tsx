@@ -1,6 +1,6 @@
 import type { ProductDetail } from "@/lib/types";
 import type { SavedEntry } from "@/lib/saved-context";
-import { formatPrice } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 
 export function CompareView({
   items,

@@ -1,13 +1,5 @@
 import type { Product, Store } from "./types";
 
-export function formatPrice(price: number, currency: string) {
-  return new Intl.NumberFormat("es-CO", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
 export function buildStoreWhatsAppLink(store: Store) {
   const message = `Hola ${store.name}, te escribo desde VITRIS, ¿me puedes ayudar con una pregunta?`;
   return `https://wa.me/${store.whatsappNumber}?text=${encodeURIComponent(message)}`;

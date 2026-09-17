@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { FeedItem } from "@/lib/types";
-import { formatPrice } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 import { ProductGallery } from "./ProductGallery";
 import { StoreRow } from "./StoreRow";
 import { ProductBadge, AvailabilityTag, Rating } from "./ProductMeta";

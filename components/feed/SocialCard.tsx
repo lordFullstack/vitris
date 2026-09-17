@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { FeedItem } from "@/lib/types";
-import { formatPrice } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 import { StoreRow } from "./StoreRow";
 import { PromotionBadge } from "./PromotionBadge";
 import { LikeButton } from "@/components/ui/LikeButton";

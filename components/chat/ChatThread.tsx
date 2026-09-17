@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import type { Store, ProductDetail, ChatMessage, ConversationStatus } from "@/lib/types";
 import { quickQuestions } from "@/lib/chat-data";
-import { buildChatWhatsAppLink, formatPrice } from "@/lib/whatsapp";
+import { buildChatWhatsAppLink } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 import { IconBack, IconWhatsapp } from "@/components/icons";
 
 const statusLabel: Record<ConversationStatus, string> = {

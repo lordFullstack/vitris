@@ -5,7 +5,7 @@ import Link from "next/link";
 import { productDetails } from "@/lib/product-detail";
 import { stores } from "@/lib/mock-data";
 import { categories, popularSearches } from "@/lib/explore-data";
-import { formatPrice } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 import { IconSearch, IconClose } from "@/components/icons";
 
 export function SearchView({ initialQuery = "" }: { initialQuery?: string }) {

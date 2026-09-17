@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ProductDetail } from "@/lib/types";
 import type { SavedEntry } from "@/lib/saved-context";
-import { formatPrice } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 import { formatRelativeDate } from "@/lib/format";
 import { AvailabilityTag } from "@/components/feed/ProductMeta";
 import { SaveButton } from "@/components/ui/SaveButton";

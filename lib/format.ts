@@ -1,3 +1,11 @@
+export function formatPrice(price: number, currency: string) {
+  return new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(price);
+}
+
 export function formatRelativeDate(iso: string) {
   const date = new Date(iso);
   const diffMs = Date.now() - date.getTime();

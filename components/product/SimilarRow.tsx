@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { SimilarProduct } from "@/lib/types";
-import { formatPrice } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 
 export function SimilarRow({
   items,
