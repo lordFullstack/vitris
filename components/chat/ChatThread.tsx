@@ -129,7 +129,7 @@ export function ChatThread({
             aria-label="Enviar"
             className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-pill bg-orbital text-void"
           >
-            ➤
+            <IconBack size={20} className="rotate-180" />
           </button>
         </div>
 
