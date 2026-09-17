@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { storeRepo, productRepo } from "@/lib/data";
-import { feedItems } from "@/lib/mock-data";
+import { storeRepo, productRepo, feedRepo } from "@/lib/data";
 import { StoreHeader } from "@/components/store/StoreHeader";
 import { StoreTabs } from "@/components/store/StoreTabs";
 
@@ -20,12 +19,10 @@ export default async function TiendaPage({ params }: { params: { id: string } })
     );
   }
 
-  const products = await productRepo.listByStore(store.id);
-  // Novedades sigue filtrando el feed mock directo hasta el Paso 2, que
-  // mueve feedItems detrás de FeedRepo y esto pasa a feedRepo.list(...).
-  const novedades = feedItems.filter(
-    (f) => f.store.id === store.id && f.type === "INSPIRATIONAL_POST"
-  );
+  const [products, novedades] = await Promise.all([
+    productRepo.listByStore(store.id),
+    feedRepo.list({ storeId: store.id, types: ["INSPIRATIONAL_POST"] }),
+  ]);
 
   return (
     <div className="min-h-dvh bg-void pb-6">

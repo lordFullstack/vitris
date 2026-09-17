@@ -1,8 +1,11 @@
 import { TopBar, TopBarAction } from "@/components/shell/TopBar";
 import { FeedList } from "@/components/feed/FeedList";
 import { IconSearch, IconBell, IconChat } from "@/components/icons";
+import { feedRepo } from "@/lib/data";
 
-export default function FeedPage() {
+export default async function FeedPage() {
+  const items = await feedRepo.list();
+
   return (
     <>
       <TopBar
@@ -21,7 +24,7 @@ export default function FeedPage() {
           </>
         }
       />
-      <FeedList />
+      <FeedList items={items} />
     </>
   );
 }
