@@ -2,6 +2,16 @@ import Link from "next/link";
 import type { Store } from "@/lib/types";
 
 export function TrustRow({ store }: { store: Store }) {
+  const metaParts: string[] = [];
+  if (store.followers) metaParts.push(`${store.followers.toLocaleString("es-CO")} seguidores`);
+  if (typeof store.distanceKm === "number") {
+    metaParts.push(
+      store.distanceKm < 1
+        ? `${Math.round(store.distanceKm * 1000)} m`
+        : `${store.distanceKm.toFixed(1)} km`
+    );
+  }
+
   return (
     <Link
       href={`/tienda/${store.id}`}
@@ -21,10 +31,9 @@ export function TrustRow({ store }: { store: Store }) {
           )}
         </div>
         <p className="text-[12.5px] text-ink-faint">
-          {store.rating && <span className="text-orbital-soft">★ {store.rating.toFixed(1)}</span>}
-          {store.followers && ` · ${store.followers.toLocaleString("es-CO")} seguidores`}
-          {typeof store.distanceKm === "number" &&
-            ` · ${store.distanceKm < 1 ? `${Math.round(store.distanceKm * 1000)} m` : `${store.distanceKm.toFixed(1)} km`}`}
+          {!!store.rating && <span className="text-orbital-soft">★ {store.rating.toFixed(1)}</span>}
+          {!!store.rating && metaParts.length > 0 && " · "}
+          {metaParts.join(" · ")}
         </p>
       </div>
       <span className="text-[13px] font-medium text-orbital-soft">Ver tienda</span>

@@ -70,9 +70,9 @@ export function ProductDetailView({ detail }: { detail: ProductDetail }) {
             <h1 className="font-display text-[19px] font-semibold leading-snug text-ink">
               {detail.name}
             </h1>
-            {detail.rating && <Rating value={detail.rating} />}
+            {!!detail.rating && <Rating value={detail.rating} />}
           </div>
-          {detail.reviewsCount && (
+          {!!detail.reviewsCount && (
             <p className="mt-0.5 text-[12.5px] text-ink-faint">
               {detail.reviewsCount} reseñas
             </p>

@@ -34,7 +34,7 @@ export function ProductCard({ item }: { item: FeedItem }) {
           <h3 className="text-[15px] font-medium leading-snug text-ink">
             {product.name}
           </h3>
-          {product.rating && <Rating value={product.rating} />}
+          {!!product.rating && <Rating value={product.rating} />}
         </div>
         <div className="mt-1 flex items-center gap-2">
           <span className="font-display text-[16px] font-semibold text-ink">
