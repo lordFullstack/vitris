@@ -126,20 +126,6 @@ export function IconShare({ size = 24, ...props }: IconProps) {
   );
 }
 
-export function IconAsk({ size = 24, ...props }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" {...props}>
-      <circle cx="12" cy="12" r="8.5" stroke="currentColor" {...base} />
-      <path
-        d="M9.6 9.8c.2-1.2 1.2-2 2.5-2 1.4 0 2.5.9 2.5 2.1 0 1.6-2.3 1.7-2.5 3.3"
-        stroke="currentColor"
-        {...base}
-      />
-      <circle cx="12.1" cy="16.3" r="0.9" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 export function IconBuy({ size = 24, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" {...props}>

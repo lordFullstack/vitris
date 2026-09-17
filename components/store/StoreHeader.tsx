@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { StoreDetail } from "@/lib/types";
-import { buildStoreWhatsAppLink } from "@/lib/whatsapp";
 import { ShareButton } from "@/components/ui/ShareButton";
 import { FollowButton } from "@/components/ui/FollowButton";
-import { IconBack, IconWhatsapp, IconAsk } from "@/components/icons";
+import { QuickQuestion } from "@/components/ui/QuickQuestion";
+import { IconBack } from "@/components/icons";
 
 export function StoreHeader({ store }: { store: StoreDetail }) {
   const metaParts: string[] = [];
@@ -84,22 +84,7 @@ export function StoreHeader({ store }: { store: StoreDetail }) {
         </div>
 
         <div className="mt-4 flex items-center gap-2 pb-1">
-          <a
-            href={buildStoreWhatsAppLink(store)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-11 flex-1 items-center justify-center gap-2 rounded-pill bg-whats px-4 text-[13.5px] font-semibold text-void transition-transform active:scale-[0.98]"
-          >
-            <IconWhatsapp size={16} />
-            Escribir por WhatsApp
-          </a>
-          <Link
-            href={`/chat?tienda=${store.id}`}
-            aria-label="Preguntar"
-            className="flex h-11 w-11 items-center justify-center rounded-pill border border-graphite-line text-ink-soft transition-colors active:bg-graphite-elevated"
-          >
-            <IconAsk size={20} />
-          </Link>
+          <QuickQuestion href={`/chat?tienda=${store.id}`} />
         </div>
       </div>
     </div>

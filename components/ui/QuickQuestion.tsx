@@ -2,23 +2,33 @@ import Link from "next/link";
 import { IconChat } from "@/components/icons";
 
 export function QuickQuestion({
-  productId,
+  href,
   overlay = false,
 }: {
-  productId: string;
+  href: string;
   overlay?: boolean;
 }) {
+  if (overlay) {
+    return (
+      <Link
+        href={href}
+        aria-label="Preguntar"
+        data-event="ASK"
+        className="flex h-11 w-11 items-center justify-center rounded-pill bg-void/55 text-ink backdrop-blur-md transition-transform active:scale-90"
+      >
+        <IconChat size={19} />
+      </Link>
+    );
+  }
+
   return (
     <Link
-      href={`/chat?producto=${productId}`}
-      aria-label="Preguntar"
-      className={
-        overlay
-          ? "flex h-11 w-11 items-center justify-center rounded-pill bg-void/55 text-ink backdrop-blur-md transition-transform active:scale-90"
-          : "flex h-11 w-11 items-center justify-center rounded-pill text-ink-soft transition-colors active:bg-graphite-elevated"
-      }
+      href={href}
+      data-event="ASK"
+      className="flex h-11 flex-1 items-center justify-center gap-2 rounded-pill bg-orbital px-4 text-[13.5px] font-semibold text-ink transition-transform active:scale-[0.98]"
     >
-      <IconChat size={overlay ? 19 : 20} />
+      <IconChat size={18} />
+      Preguntar
     </Link>
   );
 }

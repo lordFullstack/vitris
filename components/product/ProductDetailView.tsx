@@ -116,12 +116,12 @@ export function ProductDetailView({ detail }: { detail: ProductDetail }) {
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-graphite-line/60 bg-void/90 px-4 pb-3 pt-3 backdrop-blur-xl">
         <div className="flex items-center gap-2">
+          <QuickQuestion href={`/chat?producto=${detail.id}`} />
           <WhatsAppButton
             store={detail.store}
             product={detail}
             selectedVariants={selectedLabels}
           />
-          <QuickQuestion productId={detail.id} />
         </div>
       </div>
 

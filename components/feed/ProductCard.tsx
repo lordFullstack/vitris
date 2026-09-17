@@ -22,7 +22,8 @@ export function ProductCard({ item }: { item: FeedItem }) {
         {/* Riel de acciones en el borde derecho, zona de alcance del pulgar */}
         <div className="absolute bottom-3 right-3 flex flex-col items-center gap-2.5">
           <SaveButton productId={product.id} />
-          <QuickQuestion productId={product.id} overlay />
+          <QuickQuestion href={`/chat?producto=${product.id}`} overlay />
+          <WhatsAppButton store={store} product={product} overlay />
           <ShareButton title={product.name} overlay />
         </div>
       </div>
@@ -43,10 +44,6 @@ export function ProductCard({ item }: { item: FeedItem }) {
           <AvailabilityTag availability={product.availability} />
         </div>
       </Link>
-
-      <div className="mt-3 flex">
-        <WhatsAppButton store={store} product={product} />
-      </div>
     </article>
   );
 }
