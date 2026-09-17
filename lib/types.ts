@@ -120,6 +120,10 @@ export interface ProductDetail {
   images: string[];
   description: string;
   variants?: VariantGroup[];
+  /** Se renderiza en el detalle de producto (LOOP V, V3): la tienda no
+   *  es un dato secundario. ProductRepo.getById (Bloque B) debe devolver
+   *  el producto con la tienda ya resuelta acá adentro — nunca un
+   *  storeId pelado que obligue a una segunda llamada desde el componente. */
   store: Store;
   similar: SimilarProduct[];
 }

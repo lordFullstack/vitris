@@ -25,10 +25,16 @@ function defaultSelection(variants: VariantGroup[] | undefined) {
   return initial;
 }
 
+function storeDistanceLabel(distanceKm: number | undefined) {
+  if (typeof distanceKm !== "number") return null;
+  return distanceKm < 1 ? `${Math.round(distanceKm * 1000)} m` : `${distanceKm.toFixed(1)} km`;
+}
+
 export function ProductDetailView({ detail }: { detail: ProductDetail }) {
   useCaptureRef();
   const [selection, setSelection] = useState(() => defaultSelection(detail.variants));
   const [sheetOpen, setSheetOpen] = useState(false);
+  const distanceLabel = storeDistanceLabel(detail.store.distanceKm);
 
   const selectedLabels = useMemo(() => {
     const labels: Record<string, string> = {};
@@ -77,6 +83,28 @@ export function ProductDetailView({ detail }: { detail: ProductDetail }) {
               {detail.reviewsCount} reseñas
             </p>
           )}
+          <Link
+            href={`/tienda/${detail.store.id}`}
+            className="mt-1.5 flex items-center gap-1.5"
+          >
+            <img
+              src={detail.store.avatarUrl}
+              alt=""
+              className="h-6 w-6 rounded-pill object-cover"
+            />
+            <span className="text-[13px] font-medium text-ink">{detail.store.name}</span>
+            {detail.store.verified && (
+              <span
+                aria-label="Tienda verificada"
+                className="flex h-[15px] w-[15px] items-center justify-center rounded-pill bg-orbital text-[9px] text-void"
+              >
+                ✓
+              </span>
+            )}
+            {distanceLabel && (
+              <span className="text-[13px] text-ink-soft">· {distanceLabel}</span>
+            )}
+          </Link>
           <div className="mt-2 flex items-center gap-2">
             <span className="font-display text-[20px] font-semibold text-ink">
               {formatPrice(detail.price, detail.currency)}
