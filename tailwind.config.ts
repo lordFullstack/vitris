@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-// Design System V1 — Social Commerce
+// Design System V1 — VITRIS
 // Dirección: Dark / premium / táctil. Soft Tech + Orbital.
 const config: Config = {
   content: [

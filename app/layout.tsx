@@ -17,7 +17,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Social Commerce — Vitrinear",
+  title: "VITRIS — Vitrinear",
   description: "No vienes a buscar. Vienes a vitrinear.",
   manifest: "/manifest.json",
 };

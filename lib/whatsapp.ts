@@ -9,7 +9,7 @@ export function formatPrice(price: number, currency: string) {
 }
 
 export function buildStoreWhatsAppLink(store: Store) {
-  const message = `Hola ${store.name}, te escribo desde Social Commerce, ¿me puedes ayudar con una pregunta?`;
+  const message = `Hola ${store.name}, te escribo desde VITRIS, ¿me puedes ayudar con una pregunta?`;
   return `https://wa.me/${store.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
@@ -34,6 +34,6 @@ export function buildWhatsAppLink(
     selectedVariants && Object.keys(selectedVariants).length > 0
       ? ` (${Object.values(selectedVariants).join(", ")})`
       : "";
-  const message = `Hola ${store.name}, vi "${product.name}"${variantText} (ref. ${product.id}) en Social Commerce y quiero preguntar por disponibilidad.`;
+  const message = `Hola ${store.name}, vi "${product.name}"${variantText} (ref. ${product.id}) en VITRIS y quiero preguntar por disponibilidad.`;
   return `https://wa.me/${store.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }

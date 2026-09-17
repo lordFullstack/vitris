@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 /**
- * Familia de iconos propia — Social Commerce
+ * Familia de iconos propia — VITRIS
  * Grid base 24×24. Stroke consistente. Terminales y joins redondeados.
  * Cada icono soporta `active` para alternar entre outline y filled.
  * Ver ICONOGRAPHY_SPEC.md

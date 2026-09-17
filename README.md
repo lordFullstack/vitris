@@ -1,6 +1,8 @@
-# Social Commerce — LOOP 00 a 06 (completo)
+# VITRIS
 
 "No vienes a buscar. Vienes a vitrinear."
+
+Código implementado hasta el LOOP 06. Arquitectura y producto definidos hasta el LOOP 09.
 
 ## Cómo correrlo
 

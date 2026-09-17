@@ -12,7 +12,7 @@ export function ShareButton({
   async function handleShare() {
     const shareData = {
       title,
-      text: `Mira esto en Social Commerce: ${title}`,
+      text: `Mira esto en VITRIS: ${title}`,
       url: typeof window !== "undefined" ? window.location.href : "",
     };
     if (typeof navigator !== "undefined" && navigator.share) {
