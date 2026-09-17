@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   title: "VITRIS — Vitrinear",
   description: "No vienes a buscar. Vienes a vitrinear.",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
