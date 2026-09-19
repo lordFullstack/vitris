@@ -1,3 +1,21 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "overrides": [
+    {
+      "files": ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/lib/data/mock/*", "@/lib/data/mock"],
+                "message": "No importes mocks directo — usá los repositorios desde \"@/lib/data\" (esa es la frontera; el mock queda detrás)."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }
