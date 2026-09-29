@@ -147,6 +147,7 @@ export type Database = {
           hours: string | null
           id: string
           name: string
+          owner_user_id: string | null
           policies: string | null
           published: boolean
           slug: string
@@ -165,6 +166,7 @@ export type Database = {
           hours?: string | null
           id?: string
           name: string
+          owner_user_id?: string | null
           policies?: string | null
           published?: boolean
           slug: string
@@ -183,6 +185,7 @@ export type Database = {
           hours?: string | null
           id?: string
           name?: string
+          owner_user_id?: string | null
           policies?: string | null
           published?: boolean
           slug?: string
