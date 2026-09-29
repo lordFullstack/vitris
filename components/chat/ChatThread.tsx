@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Store, ProductDetail, ChatMessage, ConversationStatus } from "@/lib/types";
-import { quickQuestions } from "@/lib/data";
+import { quickQuestions } from "@/lib/data/quick-questions";
 import { sendChatMessage } from "@/lib/data/actions";
 import { buildChatWhatsAppLink } from "@/lib/whatsapp";
 import { formatPrice } from "@/lib/format";

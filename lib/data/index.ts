@@ -1,24 +1,29 @@
-import { mockProductRepo } from "./mock/products";
-import { mockStoreRepo } from "./mock/stores";
-import { mockFeedRepo } from "./mock/feed";
+import { supabaseProductRepo } from "./supabase/products";
+import { supabaseStoreRepo } from "./supabase/stores";
+import { supabaseFeedRepo } from "./supabase/feed";
 import { mockConversationRepo } from "./mock/conversations";
 import type { ProductRepo, StoreRepo, FeedRepo, ConversationRepo } from "./types";
 
-// EL archivo que cambia en el LOOP 08. En Supabase, estas cuatro líneas
-// pasan a apuntar a las implementaciones reales y nada más cambia — ese es
-// el examen de este bloque.
+// EL archivo que decide de dónde salen los datos (LOOP 07 — Fundación
+// técnica). Product/Store/Feed pasan a Supabase en el LOOP 08.
+//
+// ConversationRepo se queda en el mock a propósito: S1 del sprint piloto
+// dice que Preguntar es un handoff a WhatsApp, sin chat interno con
+// respuesta del comercio — no hay (ni debe haber) tabla de conversaciones
+// en este schema. La implementación completa que ya construimos (Bloque B)
+// se mantiene como la experiencia de "preguntar" dentro de la sesión.
 
-export const productRepo: ProductRepo = mockProductRepo;
-export const storeRepo: StoreRepo = mockStoreRepo;
-export const feedRepo: FeedRepo = mockFeedRepo;
+export const productRepo: ProductRepo = supabaseProductRepo;
+export const storeRepo: StoreRepo = supabaseStoreRepo;
+export const feedRepo: FeedRepo = supabaseFeedRepo;
 export const conversationRepo: ConversationRepo = mockConversationRepo;
 
-// Contenido estático que no pasa por la frontera de repositorios — no es
-// dato persistido, es copy/curaduría (Explorar, preguntas rápidas del
-// chat). Se re-exporta desde acá para que los componentes tengan un único
-// lugar de dónde importar todo lo relacionado a datos.
-export { categories, popularSearches, getNewArrivals, getTrending } from "./mock/explore";
-export type { Category } from "./mock/explore";
-export { quickQuestions } from "./mock/conversations";
+// Contenido estático/curado que no pasa por la frontera de repositorios.
+// categories ahora tiene fuente real (tabla categories) — por eso es
+// getCategories() async, ya no un array importado directo. popularSearches
+// y quickQuestions siguen siendo copy editorial sin tabla propia.
+export { getCategories, popularSearches, getNewArrivals, getTrending } from "./supabase/explore";
+export { quickQuestions } from "./quick-questions";
+export type { Category } from "@/lib/types";
 
 export type { ProductRepo, StoreRepo, FeedRepo, ConversationRepo } from "./types";

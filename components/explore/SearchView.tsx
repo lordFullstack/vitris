@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import type { ProductDetail, PublicStore } from "@/lib/types";
-import { categories, popularSearches } from "@/lib/data";
+import type { ProductDetail, PublicStore, Category } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { IconSearch, IconClose } from "@/components/icons";
 
@@ -11,10 +10,14 @@ export function SearchView({
   initialQuery = "",
   products,
   stores,
+  categories,
+  popularSearches,
 }: {
   initialQuery?: string;
   products: ProductDetail[];
   stores: PublicStore[];
+  categories: Category[];
+  popularSearches: string[];
 }) {
   const [query, setQuery] = useState(initialQuery);
   const q = query.trim().toLowerCase();

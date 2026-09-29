@@ -95,6 +95,12 @@ export interface Conversation {
   messages: ChatMessage[];
 }
 
+export interface Category {
+  id: string;
+  label: string;
+  image?: string;
+}
+
 export interface StoreCollection {
   id: string;
   name: string;

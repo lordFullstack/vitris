@@ -2,16 +2,7 @@ import type { Conversation, ChatMessage } from "@/lib/types";
 import type { ConversationRepo } from "../types";
 
 // Mock centralizado de conversaciones. Antes lib/chat-data.ts.
-
-export const quickQuestions = [
-  "¿Tienen mi talla?",
-  "¿Está disponible?",
-  "¿Qué colores tienen?",
-  "¿Hacen envíos?",
-  "¿Dónde están?",
-  "¿Es original?",
-  "¿Cuánto demora?",
-];
+// quickQuestions vive en ../quick-questions.ts, no acá — ver ese archivo.
 
 export const conversations: Conversation[] = [
   {

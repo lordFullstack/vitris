@@ -1,3 +1,4 @@
+import type { Category } from "@/lib/types";
 import { mockProductRepo } from "./products";
 
 // Mock centralizado para Explorar. Antes lib/explore-data.ts.
@@ -7,12 +8,6 @@ import { mockProductRepo } from "./products";
 // No tiene contrato de repositorio propio (no es un dominio del Bloque B):
 // categories/popularSearches son copy estático, y getNewArrivals/getTrending
 // son listas curadas que resuelven contra ProductRepo.
-
-export interface Category {
-  id: string;
-  label: string;
-  image: string;
-}
 
 export const categories: Category[] = [
   { id: "moda", label: "Moda", image: "https://picsum.photos/seed/cat-moda/300/300" },
