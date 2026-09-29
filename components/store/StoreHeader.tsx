@@ -22,7 +22,7 @@ export function StoreHeader({ store }: { store: StoreDetail }) {
         <img
           src={store.coverImage}
           alt=""
-          className="h-40 w-full object-cover"
+          className="h-52 w-full object-cover"
         />
         <div className="safe-top absolute inset-x-0 top-0 flex items-center p-3">
           <Link
@@ -39,36 +39,32 @@ export function StoreHeader({ store }: { store: StoreDetail }) {
       </div>
 
       <div className="px-4">
-        <div className="mt-3 flex items-center gap-3">
-          <img
-            src={store.avatarUrl}
-            alt=""
-            className="h-[72px] w-[72px] flex-shrink-0 rounded-pill border-2 border-graphite-line object-cover"
-          />
+        <img
+          src={store.avatarUrl}
+          alt=""
+          className="relative z-10 -mt-10 h-[88px] w-[88px] flex-shrink-0 rounded-pill border-4 border-void object-cover"
+        />
 
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-1.5">
-              <h1 className="truncate font-display text-[19px] font-semibold text-ink">
-                {store.name}
-              </h1>
-              {store.verified && (
-                <span
-                  aria-label="Tienda verificada"
-                  className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-pill bg-orbital text-[10px] text-void"
-                >
-                  ✓
-                </span>
-              )}
-            </div>
-            <div className="mt-1.5 flex items-center justify-between gap-3">
-              <p className="min-w-0 truncate text-[12.5px] text-ink-faint">
-                {!!store.rating && <span className="text-orbital-soft">★ {store.rating.toFixed(1)}</span>}
-                {!!store.rating && metaParts.length > 0 && " · "}
-                {metaParts.join(" · ")}
-              </p>
-              <FollowButton storeId={store.id} variant="compact" />
-            </div>
-          </div>
+        <div className="mt-3 flex items-center gap-1.5">
+          <h1 className="truncate font-display text-[19px] font-semibold text-ink">
+            {store.name}
+          </h1>
+          {store.verified && (
+            <span
+              aria-label="Tienda verificada"
+              className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-pill bg-orbital text-[10px] text-void"
+            >
+              ✓
+            </span>
+          )}
+        </div>
+        <div className="mt-1.5 flex items-center justify-between gap-3">
+          <p className="min-w-0 truncate text-[12.5px] text-ink-faint">
+            {!!store.rating && <span className="text-orbital-soft">★ {store.rating.toFixed(1)}</span>}
+            {!!store.rating && metaParts.length > 0 && " · "}
+            {metaParts.join(" · ")}
+          </p>
+          <FollowButton storeId={store.id} variant="compact" />
         </div>
 
         <p className="mt-3 text-[14px] leading-relaxed text-ink-soft">{store.bio}</p>
