@@ -3,6 +3,9 @@ import { FeedList } from "@/components/feed/FeedList";
 import { IconSearch, IconBell, IconChat } from "@/components/icons";
 import { feedRepo } from "@/lib/data";
 
+// Datos reales que cambian con cada producto publicado — nunca estático.
+export const dynamic = "force-dynamic";
+
 export default async function FeedPage() {
   const items = await feedRepo.list();
 

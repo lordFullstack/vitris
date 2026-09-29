@@ -5,6 +5,9 @@ import { PlaceholderSection } from "@/components/explore/PlaceholderSection";
 import { SimilarRow } from "@/components/product/SimilarRow";
 import { getCategories, getNewArrivals, getTrending } from "@/lib/data";
 
+// Datos reales que cambian con cada producto publicado — nunca estático.
+export const dynamic = "force-dynamic";
+
 export default async function ExplorarPage() {
   const [categories, newArrivals, trending] = await Promise.all([
     getCategories(),

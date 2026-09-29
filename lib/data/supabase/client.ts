@@ -14,4 +14,11 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: { persistSession: false },
+  global: {
+    // Next.js cachea fetch() indefinidamente por default (Data Cache), y
+    // acá los datos cambian con cada alta de comercio/producto — sin esto,
+    // una tienda editada podía seguir mostrando la versión vieja hasta el
+    // próximo deploy. Encontrado probando un update real en Supabase.
+    fetch: (input, init) => fetch(input, { ...init, cache: "no-store" }),
+  },
 });

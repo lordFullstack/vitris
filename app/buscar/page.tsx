@@ -2,6 +2,9 @@ import { ScreenHeader } from "@/components/ui/ScreenHeader";
 import { SearchView } from "@/components/explore/SearchView";
 import { productRepo, storeRepo, getCategories, popularSearches } from "@/lib/data";
 
+// Datos reales que cambian con cada producto/tienda publicados — nunca estático.
+export const dynamic = "force-dynamic";
+
 export default async function BuscarPage({
   searchParams,
 }: {
