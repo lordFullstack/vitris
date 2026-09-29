@@ -42,7 +42,7 @@ export function StoreHeader({ store }: { store: StoreDetail }) {
         <img
           src={store.avatarUrl}
           alt=""
-          className="relative z-10 -mt-10 h-[88px] w-[88px] flex-shrink-0 rounded-pill border-4 border-void object-cover"
+          className="relative z-10 -mt-10 h-[88px] w-[88px] flex-shrink-0 rounded-pill border-4 border-orbital object-cover"
         />
 
         <div className="mt-3 flex items-center gap-1.5">
